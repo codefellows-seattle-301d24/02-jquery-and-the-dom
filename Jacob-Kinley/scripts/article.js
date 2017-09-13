@@ -35,12 +35,11 @@ Article.prototype.toHtml = function() {
     5. publication date. */
   $newArticle.find('h2')
       .text(this.title);
-  $newArticle.find('address')
-      .text(this.author);
   $newArticle.find('a')
-      .attr('href',this.authorUrl);
+      .attr('href',this.authorUrl)
+      .text(this.author);
   $newArticle.find('.article-body')
-      .text(this.body);
+      .html(this.body);
 
   console.log($newArticle);
 
