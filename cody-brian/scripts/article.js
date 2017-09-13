@@ -15,7 +15,7 @@ Article.prototype.toHtml = function() {
   with a class of template a display of none. Let's make
   sure we're not accidentally hiding our cloned article! */
 
-  if (!this.publishedOn) $newArticle.addClass('draft');
+  if (!this.publishedOn) $newArticle.addClass('draft').removeClass('template');
   $newArticle.data('category', this.category);
 
   /* TODO: Now use jQuery traversal and setter methods to fill in the rest
@@ -26,6 +26,16 @@ Article.prototype.toHtml = function() {
     3. article title,
     4. article body, and
     5. publication date. */
+  $newArticle.find('h1')
+              .text(this.title);
+  $newArticle.find('.byline a')
+              .text(this.author)
+              .attr('href', this.authorUrl);
+  $newArticle.find('time')
+              .text(this.publishedOn);
+  $newArticle.find('.article-body')
+              .text(this.body);
+  //$('#articles').append($newArticle);
 
   // Display the date as a relative number of 'days ago'
   $newArticle.find('time').html('about ' + parseInt((new Date() - new Date(this.publishedOn))/60/60/24/1000) + ' days ago');
